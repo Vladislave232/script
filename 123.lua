@@ -52,6 +52,7 @@ function main()
             else
                 sampAddChatMessage('{00FFFF}Мой бот не обнаружил ничего', -1)
             end
+            os.remove(update_path)
         end
     end)
     while true do
