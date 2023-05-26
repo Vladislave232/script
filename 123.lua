@@ -42,7 +42,6 @@ function main()
     sampRegisterChatCommand('nap', cmd_churka)
     sampRegisterChatCommand("raz", cmd_balalai)
     sampRegisterChatCommand('otb', cmd_otbor)
-    sampRegisterChatCommand('piz', cmd_checkop)
     downloadUrlToFile(update_url, update_path, function(id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
@@ -112,10 +111,7 @@ function imgui.OnDrawFrame()
     imgui.Text(u8'Раздача')
     imgui.Combo(u8'Слово', razdacha, word, #word)
     imgui.Combo(u8'Призы', razdacha_zapusk, prizeon, #prizeon)
-    imgui.Text(u8'Ты лох')
     imgui.SameLine()
-    if imgui.ToggleButton("Test##1", imBool) then
-	end
     imgui.Spinner("##spinner", 5, 3, imgui.GetColorU32(imgui.GetStyle().Colors[imgui.Col.ButtonHovered]))
     if imgui.InputText(u8'Введите ID победителя', text_buffer) then
     end
@@ -157,14 +153,6 @@ end
 function cmd_otbor(arg)
     if #arg == 0 then
         sampShowDialog(14, 'Выберите лидерку', dialogStrr, 'Тык', 'Закрыть', 2)
-    end
-end
-
-function cmd_checkop(arg)
-    if imBool.v == false then
-        sampAddChatMessage('Пиздец', -1)
-    else
-        sampAddChatMessage('пизда', -1)
     end
 end
 
