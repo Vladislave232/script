@@ -26,13 +26,13 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 
-local script_vers = 1
-local script_vers_text = '1.00'
+local script_vers = 2
+local script_vers_text = '1.01'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
 
-local script_url = ''
+local script_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/123.lua'
 local script_path = thisScript().path
 
 function main()
@@ -43,16 +43,6 @@ function main()
     sampRegisterChatCommand("raz", cmd_balalai)
     sampRegisterChatCommand('otb', cmd_otbor)
     sampRegisterChatCommand('piz', cmd_checkop)
-    if update_state then
-        sampAddChatMessage('{FFD700}}Вышло обновление. {FFFFE0}Желается обновиться? P = Да. O = Отменить.')
-        if wasKeyPressed(key.VK_P then)
-            downloadUrlToFile(script_url, script_path, function(id, status)
-                if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    sampAddChatMessage('{00FFFF}Скрипт обновлен успешно')
-                end
-            end)
-        end
-    end
     downloadUrlToFile(update_url, update_path, function(id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
@@ -64,6 +54,13 @@ function main()
     end)
     while true do
         wait(0)
+        downloadUrlToFile(script_url, script_path, function(id, status)
+            if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+                sampAddChatMessage('{00FFFF}Скрипт обновлен успешно')
+                thisScript():reload()
+            end
+        end)
+    end
         local result, button, list, input = sampHasDialogRespond(13)
         if result then
             if button == 1 then
@@ -80,15 +77,15 @@ function main()
         if result then
             if button == 1 then
                 if list == 0 then
-                    sampSendChat('aad Отбор | Сейчас пройдет отбор на банду "Rifa" желающие /gomp.')
+                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Rifa" желающие /gomp.')
                 elseif list == 1 then
-                    sampSendChat('aad Отбор | Сейчас пройдет отбор на банду "Vagos" желающие /gomp.')
+                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Vagos" желающие /gomp.')
                 elseif list == 2 then
-                    sampSendChat('aad Отбор | Сейчас пройдет отбор на банду "Aztecas" желающие /gomp.')
+                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Aztecas" желающие /gomp.')
                 elseif list == 3 then
-                    sampSendChat('aad Отбор | Сейчас пройдет отбор на банду "Groove" желающие /gomp.')
+                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Groove" желающие /gomp.')
                 elseif list == 4 then
-                    sampSendChat('aad Отбор | Сейчас пройдет отбор на банду "Ballas" желающие /gomp.')
+                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Ballas" желающие /gomp.')
                 end
             end
         end
