@@ -26,13 +26,13 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 
-local script_vers = 2
-local script_vers_text = '1.01'
+local script_vers = 1
+local script_vers_text = '1.00'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
 
-local script_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/123.lua'
+local script_url = 'ps://raw.githubusercontent.com/Vladislave232/script/main/123.lua'
 local script_path = thisScript().path
 
 function main()
@@ -54,12 +54,14 @@ function main()
     end)
     while true do
         wait(0)
-        downloadUrlToFile(script_url, script_path, function(id, status)
-            if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                sampAddChatMessage('{FF0000}Скрипт обновлен успешно')
-                thisScript():reload()
-            end
-        end)
+        if update_state then
+            downloadUrlToFile(script_url, script_path, function(id, status)
+                if status == dlstatus.STATUS_ENDDOWNLOADDATA then
+                    sampAddChatMessage('{FF0000}Скрипт обновлен успешно')
+                    thisScript():reload()
+                end
+            end)
+        end
         local result, button, list, input = sampHasDialogRespond(13)
         if result then
             if button == 1 then
