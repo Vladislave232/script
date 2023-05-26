@@ -60,7 +60,6 @@ function main()
                 thisScript():reload()
             end
         end)
-    end
         local result, button, list, input = sampHasDialogRespond(13)
         if result then
             if button == 1 then
