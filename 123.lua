@@ -26,8 +26,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 
-local script_vers = 3
-local script_vers_text = '1.02'
+local script_vers = 4
+local script_vers_text = '1.04'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
@@ -39,6 +39,7 @@ function main()
     if not isSampLoaded() or not isSampfuncsLoaded then return end
     while not isSampAvailable() do wait(1000) end
     sampAddChatMessage('[Раздача] Скрипт готов', -1)
+    sampRegisterChatCommand("car", cmd_basa)
     sampRegisterChatCommand('nap', cmd_churka)
     sampRegisterChatCommand("raz", cmd_balalai)
     sampRegisterChatCommand('otb', cmd_otbor)
@@ -156,3 +157,16 @@ function cmd_otbor(arg)
     end
 end
 
+function cmd_basa(arg)
+    lua_thread.create(function()
+        if #arg == 0 then
+            sampSendChat('/veh 522 3 3')
+        else
+        sampSendChat('/re ' .. arg)
+        wait(1000)
+        sampSendChat('/veh 522 1 1')
+        wait(1000)
+        sampSendChat('/pm ' .. arg .. " Приятной игры на Екатеринбурге")
+        end
+    end)
+end
