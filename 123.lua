@@ -49,8 +49,6 @@ function main()
             if tonumber(updateIni.info.vers) > script_vers then
                 sampAddChatMessage('{00FFFF}Мой бот обнаружил обновление: ' .. updateIni.info.vers_text, -1)
                 update_state = true
-            else
-                sampAddChatMessage('{00FFFF}Мой бот не обнаружил ничего', -1)
             end
             os.remove(update_path)
         end
