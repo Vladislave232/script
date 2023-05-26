@@ -47,7 +47,7 @@ function main()
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.info.vers) > script_vers then
-                sampAddChatMessage('Мой бот обнаружил обновление: ' .. updateIni.info.vers_text, -1)
+                sampAddChatMessage('{00FFFF}Мой бот обнаружил обновление: ' .. updateIni.info.vers_text, -1)
                 update_state = true
             end
         end
@@ -56,10 +56,11 @@ function main()
         wait(0)
         downloadUrlToFile(script_url, script_path, function(id, status)
             if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                sampAddChatMessage('{00FFFF}Скрипт обновлен успешно')
+                sampAddChatMessage('{FF0000}Скрипт обновлен успешно')
                 thisScript():reload()
             end
         end)
+    end
         local result, button, list, input = sampHasDialogRespond(13)
         if result then
             if button == 1 then
