@@ -32,7 +32,7 @@ local script_vers_text = '1.00'
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
 
-local script_url = 'ps://raw.githubusercontent.com/Vladislave232/script/main/123.lua'
+local script_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/123.lua'
 local script_path = thisScript().path
 
 function main()
@@ -49,6 +49,8 @@ function main()
             if tonumber(updateIni.info.vers) > script_vers then
                 sampAddChatMessage('{00FFFF}Мой бот обнаружил обновление: ' .. updateIni.info.vers_text, -1)
                 update_state = true
+            else
+                sampAddChatMessage('{00FFFF}Мой бот не обнаружил ничего', -1)
             end
         end
     end)
