@@ -11,29 +11,54 @@ imgui.Spinner = require('imgui_addons').Spinner
 imgui.BufferingBar = require('imgui_addons').BufferingBar
 local razdacha_zapusk = imgui.ImInt(0)
 local main_window_state = imgui.ImBool(false)
-local dialogArr = {'Отборы', 'Предложить МП', 'Игровой вопрос'}
+local dialogArr = {'Наборы', 'Предложить МП', 'Игровой вопрос'}
 local dialogStr = ''
 local dialogArrr = {'Rifa', 'Vagos', 'Aztecas', 'Groove', 'Ballas'}
 local dialogStrr = ''
+local dialogGoss = {'ППС', 'ФСБ', 'ВМФ', 'Мэрия', 'ДПС', 'ОМОН', 'АП', 'МЧС', 'СМИ'}
+local dialogGos = ''
+local dialogMaff = {'LCN', 'Yakudza', 'Русская Мафия', 'Хитманы'}
+local dialogMaf = ''
 local imBool = imgui.ImBool(false)
 local text_buffer = imgui.ImBuffer(256)
 local numbers = {'20+23', '34+78', '46*2' , '4*7', '52+56', '46+54', '20-8', '46-41', '7*8', '44/4' , '10+99', '412-413', '45-54', '7+5', '1+1', '888+111', '111+111'}
 local word = {u8'04', u8'EKB', u8'MS', u8'Healme', u8'Kills', u8'LVL', u8'VIPCAR'}
 local prizeon = {u8'"500 Аптечек"', u8'"Костюм попугая"', u8'"Мигалку на голову"', u8'"Комплект всемогущий"', u8'"Огонек на голову"', u8'"Шляпу курицы"', u8'"Номер телефона на выбор"', u8'"1ккк"', u8'"Стиль Боя"', u8'"500 убийств"', u8'"Уровень"', u8'"ВипКар"', u8'секретный приз'}
 require "lib.moonloader"
-
+local dialogOtb = {'Ghetto', 'Goss', 'Mafia'}
+local dialogOtbb = ''
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 
-local script_vers = 4
-local script_vers_text = '1.04'
+local script_vers = 5
+local script_vers_text = '1.05'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
 
 local script_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/123.lua'
 local script_path = thisScript().path
+
+for _, str in ipairs(dialogArr) do
+    dialogStr = dialogStr .. str .. "\n"
+end
+
+for _, str in ipairs(dialogArrr) do
+    dialogStrr = dialogStrr .. str .. "\n"
+end
+
+for _, str in ipairs(dialogOtb) do
+    dialogOtbb = dialogOtbb .. str .. "\n"
+end
+
+for _, str in ipairs(dialogGoss) do
+    dialogGos = dialogGos .. str .. "\n"
+end
+
+for _, str in ipairs(dialogMaff) do
+    dialogMaf = dialogMaf .. str .. "\n"
+end
 
 function main()
     if not isSampLoaded() or not isSampfuncsLoaded then return end
@@ -75,19 +100,177 @@ function main()
                 end
             end
         end
+        local result, button, list, input = sampHasDialogRespond(16)
+        if result then
+            if button == 1 then
+                if list == 0 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Rifa".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 1 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Vagos".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 2 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Grove".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 3 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Aztec".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 4 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Ballas".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                end
+            end
+        end
+        local result, button, list, input = sampHasDialogRespond(17)
+        if result then
+            if button == 1 then
+                if list == 0 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "ППС".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 1 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "ФСБ".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 2 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "ВМФ".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 3 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Мэрии".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 4 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "ДПС".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 5 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "ОМОН".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 6 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "АП".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 7 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "МЧС".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 8 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "СМИ".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                end
+            end
+        end
+        local result, button, list, input = sampHasDialogRespond(18)
+        if result then
+            if button == 1 then
+                if list == 0 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "LCN".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 1 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Якудза".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 2 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Русская Мафия".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                elseif list == 3 then
+                    sampSendChat('/aad Отбор | Ув. игроки, сейчас проходит отбор на должность лидера "Хитманы".')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Критерии: +14, +10 часов, знание правил.')
+                    wait(1000)
+                    sampSendChat('/aad Отбор | Желающие /gomp')
+                    wait(1000)
+                    sampSendChat('/mp')
+                end
+            end
+        end
         local result, button, list, input = sampHasDialogRespond(14)
         if result then
             if button == 1 then
                 if list == 0 then
-                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Rifa" желающие /gomp.')
+                    sampShowDialog(16, 'Выберите лидерку', dialogStrr, 'Тык', 'Закрыть', 2)
                 elseif list == 1 then
-                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Vagos" желающие /gomp.')
+                    sampShowDialog(17, 'Выберите лидерку', dialogGos, 'Тык', 'Закрыть', 2)
                 elseif list == 2 then
-                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Aztecas" желающие /gomp.')
-                elseif list == 3 then
-                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Groove" желающие /gomp.')
-                elseif list == 4 then
-                    sampSendChat('/aad Отбор | Сейчас пройдет отбор на банду "Ballas" желающие /gomp.')
+                    sampShowDialog(18, 'Выберите лидерку', dialogMaf, 'Тык', 'Закрыть', 2)
                 end
             end
         end
@@ -95,14 +278,6 @@ function main()
         imgui.Process = false
         end
     end
-end
-
-for _, str in ipairs(dialogArr) do
-    dialogStr = dialogStr .. str .. "\n"
-end
-
-for _, str in ipairs(dialogArrr) do
-    dialogStrr = dialogStrr .. str .. "\n"
 end
 
 function imgui.OnDrawFrame()
@@ -153,7 +328,7 @@ end
 
 function cmd_otbor(arg)
     if #arg == 0 then
-        sampShowDialog(14, 'Выберите лидерку', dialogStrr, 'Тык', 'Закрыть', 2)
+        sampShowDialog(14, 'Выберите структуру', dialogOtbb, 'Тык', 'Закрыть', 2)
     end
 end
 
