@@ -31,8 +31,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 
-local script_vers = 6
-local script_vers_text = '1.06'
+local script_vers = 7
+local script_vers_text = '1.07'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
@@ -63,11 +63,12 @@ end
 function main()
     if not isSampLoaded() or not isSampfuncsLoaded then return end
     while not isSampAvailable() do wait(1000) end
-    sampAddChatMessage('[Раздача] Скрипт готов', -1)
+    sampAddChatMessage('[Раздача] Скрипт готов - чтобы узнать команды - /rhelp', -1)
     sampRegisterChatCommand("car", cmd_basa)
     sampRegisterChatCommand('nap', cmd_churka)
     sampRegisterChatCommand("raz", cmd_balalai)
     sampRegisterChatCommand('otb', cmd_otbor)
+    sampRegisterChatCommand('rhelp', cmd_woopo)
     downloadUrlToFile(update_url, update_path, function(id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
@@ -344,4 +345,10 @@ function cmd_basa(arg)
         sampSendChat('/pm ' .. arg .. " Приятной игры на Екатеринбурге")
         end
     end)
+end
+
+function cmd_woopo(arg)
+    if #arg == 0 then
+        sampShowDialog(209, 'Команды этого скрипта', "\n{FFFFFF}/otb - сделать отбор \n{FF0000}/raz - раздачу сделать \n{00FFFF}/car[id] - выдать машину игроку \n{FF0000}/nap - сделать напоминание", "Выдать", 'Закрыть', 1)
+    end
 end
