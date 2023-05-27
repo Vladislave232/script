@@ -332,7 +332,7 @@ function imgui.OnDrawFrame()
     imgui.SameLine()
     imgui.BufferingBar("##buffer_bar", 0.7, imgui.ImVec2(390, 6), imgui.GetColorU32(imgui.GetStyle().Colors[imgui.Col.Button]), imgui.GetColorU32(imgui.GetStyle().Colors[imgui.Col.ButtonHovered]));
 
-    imgui.Text('Тут скоро появятся цитатники!')
+    imgui.Text(u8'Тут скоро появятся цитатники!')
     imgui.End()
 end
 
