@@ -31,8 +31,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 
-local script_vers = 7
-local script_vers_text = '1.07'
+local script_vers = 8
+local script_vers_text = '1.08'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
@@ -349,6 +349,6 @@ end
 
 function cmd_woopo(arg)
     if #arg == 0 then
-        sampShowDialog(209, 'Команды этого скрипта', "\n{FFFFFF}/otb - сделать отбор \n{FF0000}/raz - раздачу сделать \n{00FFFF}/car[id] - выдать машину игроку \n{FF0000}/nap - сделать напоминание", "Выдать", 'Закрыть', 1)
+        sampShowDialog(209, 'Команды этого скрипта', "\n{FFFFFF}/otb - сделать отбор \n{FF0000}/raz - cделать раздачу \n{00FFFF}/car[id] - выдать машину игроку \n{FF0000}/nap - сделать напоминание", "Выдать", 'Закрыть', 2)
     end
 end
