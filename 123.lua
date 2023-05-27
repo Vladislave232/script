@@ -10,6 +10,7 @@ imgui.HotKey = require('imgui_addons').HotKey
 imgui.Spinner = require('imgui_addons').Spinner
 imgui.BufferingBar = require('imgui_addons').BufferingBar
 local razdacha_zapusk = imgui.ImInt(0)
+local sampev = require 'lib.samp.events'
 local main_window_state = imgui.ImBool(false)
 local dialogArr = {'Наборы', 'Предложить МП', 'Игровой вопрос'}
 local dialogStr = ''
@@ -30,9 +31,9 @@ local dialogOtbb = ''
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
-
-local script_vers = 10
-local script_vers_text = '1.10'
+local str_rand = {'123', '123'}
+local script_vers = 11
+local script_vers_text = '1.11'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
@@ -58,6 +59,15 @@ end
 
 for _, str in ipairs(dialogMaff) do
     dialogMaf = dialogMaf .. str .. "\n"
+end
+
+function sampev.onServerMessage(color, text)
+    lua_thread.create(function()
+        if string.find(text, 'С возвращением в игру, дорогой игрок :)', 1, true) then
+            wait(10000)
+            sampShowDialog(212, "{FFFFFF}О{FF0000}Б{000000}Н{FA8072}О{8B0000}В{FF1493}Л{006400}Е{808000}Н{FF4500}И{FF8C00}Е", "Добавлен цитатник!\n{FFFFFF}Исправлены баги!", "Закрыть", 'Закрыть', 0)
+        end
+    end)
 end
 
 function main()
@@ -88,6 +98,12 @@ function main()
                     thisScript():reload()
                 end
             end)
+        end
+        local result, button, list, input = sampHasDialogRespond(212)
+        if result then
+            if button == 1 then
+                sampAddChatMessage('{FF0000}Напишите свой отзыв - @guninik', -1)
+            end
         end
         local result, button, list, input = sampHasDialogRespond(13)
         if result then
@@ -279,6 +295,8 @@ function main()
         imgui.Process = false
         end
     end
+    wait(2000)
+    ran2 = math.random(1, #str_rand)
 end
 
 function imgui.OnDrawFrame()
@@ -313,6 +331,8 @@ function imgui.OnDrawFrame()
     end
     imgui.SameLine()
     imgui.BufferingBar("##buffer_bar", 0.7, imgui.ImVec2(390, 6), imgui.GetColorU32(imgui.GetStyle().Colors[imgui.Col.Button]), imgui.GetColorU32(imgui.GetStyle().Colors[imgui.Col.ButtonHovered]));
+
+    imgui.Text('Тут скоро появятся цитатники!')
     imgui.End()
 end
 
