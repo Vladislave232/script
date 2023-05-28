@@ -32,8 +32,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 local str_rand = {'123', '123'}
-local script_vers = 11
-local script_vers_text = '1.11'
+local script_vers = 12
+local script_vers_text = '1.12'
 
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
@@ -73,7 +73,7 @@ end
 function main()
     if not isSampLoaded() or not isSampfuncsLoaded then return end
     while not isSampAvailable() do wait(1000) end
-    sampAddChatMessage('[Раздача] Скрипт готов - чтобы узнать команды - /rhelp', -1)
+    sampAddChatMessage('{FF0000}[Раздача] {00FF00}Скрипт готов - чтобы узнать команды - /rhelp. {4B0082}Ваша версия: ' .. script_vers_text, -1)
     sampRegisterChatCommand("car", cmd_basa)
     sampRegisterChatCommand('nap', cmd_churka)
     sampRegisterChatCommand("raz", cmd_balalai)
