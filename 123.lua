@@ -28,7 +28,7 @@ local texter = imgui.ImBuffer(256)
 local mep = imgui.ImInt(0)
 local mepo = imgui.ImInt(0)
 local prizemep = {u8'"Король Дигла"', u8'"Русская Рулетка"', u8'"Дамба"', u8'"Прятки"', u8'"Последний Выживший"', u8'"Поливалка"', u8'"Бомбардировка"', u8'"Таран"', u8'"PUBG"', u8'"Реакция"', u8'"Бои без правил"', u8'"Гонки"'}
-local prizemp = {u8'"На Выбор"', u8'"Аптечки"', u8'"VIP-CAR"', u8'"Уровень на выбор"', u8'"Стиль Боя"', u8'Номер телефона на выбор', u8'Руководитель пидор', u8'Секрет', u8''} 
+local prizemp = {u8'"На Выбор"', u8'"Аптечки"', u8'"VIP-CAR"', u8'"Уровень на выбор"', u8'"Стиль Боя"', u8'Номер телефона на выбор', u8'Деньги', u8'Секрет', u8'Админ-права', u8'ПРОМОКОД'} 
 local numbers = {'20+23', '34+78', '46*2' , '4*7', '52+56', '46+54', '20-8', '46-41', '7*8', '44/4' , '10+99', '412-413', '45-54', '7+5', '1+1', '888+111', '111+111'}
 local word = {u8'04', u8'EKB', u8'MS', u8'Healme', u8'Kills', u8'LVL', u8'VIPCAR'}
 local prizeon = {u8'"500 Аптечек"', u8'"Костюм попугая"', u8'"Мигалку на голову"', u8'"Комплект всемогущий"', u8'"Огонек на голову"', u8'"Шляпу курицы"', u8'"Номер телефона на выбор"', u8'"1ккк"', u8'"Стиль Боя"', u8'"500 убийств"', u8'"Уровень"', u8'"ВипКар"', u8'секретный приз'}
@@ -341,14 +341,14 @@ function imgui.OnDrawFrame()
         imgui.BufferingBar("##buffer_bar", 0.7, imgui.ImVec2(390, 6), imgui.GetColorU32(imgui.GetStyle().Colors[imgui.Col.Button]), imgui.GetColorU32(imgui.GetStyle().Colors[imgui.Col.ButtonHovered]));
         imgui.Link('https://vk.com/guninik', u8'Влад Гунинык')
         imgui.Link('https://vk.com/klagem00n', u8'Сергей Семец')
-        imgui.Link('https://vk.com/natriy14', u8'Помощник: Владислав Дмитров')
+        imgui.Link('https://vk.com/natriy14', u8'Какой-то Дмитров')
         imgui.Text(u8'Тут скоро появятся цитатники!')
         imgui.End()
     end
     if second_window_state.v then
         imgui.SetNextWindowPos(imgui.ImVec2(sw /2, sh /2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
         imgui.SetNextWindowSize(imgui.ImVec2(0, 0), imgui.Cond.FirstUseEver)
-        imgui.Begin(u8'Початковий текст', second_window_state)
+        imgui.Begin(u8'Меню мероприятий', second_window_state)
         imgui.Combo(u8'Выберите приз', mep, prizemp, #prizemp)
         imgui.Combo(u8'Выберите мероприятие', mepo, prizemep, #prizemep)
         if imgui.Button(u8'Запустить', imgui.ImVec2(390, 120)) then
