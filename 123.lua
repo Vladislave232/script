@@ -39,8 +39,8 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 local str_rand = {'123', '123'}
-local script_vers = 15
-local script_vers_text = '1.15'
+local script_vers = 16
+local script_vers_text = '1.16'
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
 
