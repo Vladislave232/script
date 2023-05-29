@@ -152,9 +152,9 @@ local dialogOtbb = ''
 local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
-local str_rand = {u8'Носок – ©Роман Бакун', u8'Овсянников это не овсяш а лосяш – ©Владислав Дмитров', u8'Чил – ©Даниил Чилатов', u8'Мыша и глупый глупый глупый кот. – ©Дарья Веркеева', u8'Ты кто такой – ©Влад Гунинык', u8'дмитров куколд – ©Александр Овсянников', u8"помните: мари граса гей – ©Данил Оклей"}
-local script_vers = 20
-local script_vers_text = '1.20'
+local str_rand = {u8'Носок – ©Роман Бакун', u8'Овсянников это не овсяш а лосяш – ©Владислав Дмитров', u8'Чил – ©Даниил Чилатов', u8'Мыша и глупый глупый глупый кот. – ©Дарья Веркеева', u8'Ты кто такой – ©Влад Гунинык', u8'дмитров куколд – ©Александр Овсянников', u8"помните: мари граса гей – ©Данил Оклей", u8"АФКшу месяц на И.О– ©Сергей Семець"}
+local script_vers = 21
+local script_vers_text = '1.21'
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
 
@@ -206,7 +206,7 @@ function refresh_current_report()
 end
 
 function obnova(arg)
-    sampShowDialog(212, "{FFFFFF}О{FF0000}Б{000000}Н{FA8072}О{8B0000}В{FF1493}Л{006400}Е{808000}Н{FF4500}И{FF8C00}Е", "Добавлен цитатник! В /raz теперь вы сможете видеть фразы любимых руководящих!\n{FFFFFF}Исправлены баги!\n{FF00FF}ШОК! ТЕПЕРЬ ВЫ СМОЖЕТЕ ОТВЕЧАТЬ В 10 РАЗ ПРОДУКТИВНЕЕ /OTV! /rhelp!\nВ /raz добавлена система наказаний!", "Закрыть", 'Закрыть', 0)
+    sampShowDialog(212, "{FFFFFF}О{FF0000}Б{000000}Н{FA8072}О{8B0000}В{FF1493}Л{006400}Е{808000}Н{FF4500}И{FF8C00}Е", "Добавлен цитатник! В /raz теперь вы сможете видеть фразы любимых руководящих!\n{FFFFFF}Исправлены баги!\n{FF00FF}ШОК! ТЕПЕРЬ ВЫ СМОЖЕТЕ ОТВЕЧАТЬ В 10 РАЗ ПРОДУКТИВНЕЕ /OTV! /rhelp!\nВ /nak добавлена система наказаний!", "Закрыть", 'Закрыть', 0)
 end
 
 function cmd_balalai2(arg)
@@ -236,6 +236,11 @@ function cmd_spv(arg)
             sampSendChat('/sp ' .. arg)
         end)
     end
+end
+
+function cmd_nakaz(arg)
+    third_window_state.v = not third_window_state.v
+    imgui.Process = third_window_state.v 
 end
 
 function apply_custom_style()
@@ -340,7 +345,7 @@ end
 
 function cmd_woopo(arg)
     if #arg == 0 then
-        sampShowDialog(209, 'Команды этого скрипта', "\n{FFFFFF}/otb - сделать отбор \n{FF0000}/raz - cделать раздачу \n{FF0000}/nap - сделать напоминание \n{FF00FF}/mep - сделать мероприятие \n{00FFFF}/car[id] - выдать машину игроку \n/sp[id] - заспавнить игрока(Работает в даже в случае если игрок в Т/С)", "Выдать", 'Закрыть', 2)
+        sampShowDialog(209, 'Команды этого скрипта', "\n{FFFFFF}/otb - сделать отбор \n{FF0000}/raz - cделать раздачу \n{FF0000}/nap - сделать напоминание \n{FF00FF}/mep - сделать мероприятие \n{00FFFF}/car[id] - выдать машину игроку \n /sp[id] - заспавнить игрока(Работает в даже в случае если игрок в Т/С) \n /otv - меню ответов на репорт \n/nak - Система Наказаний", "Выдать", 'Закрыть', 2)
     end
 end
 
@@ -359,6 +364,7 @@ function main()
     sampRegisterChatCommand('obnova', obnova)
     sampRegisterChatCommand('otb', cmd_otbor)
     sampRegisterChatCommand('rhelp', cmd_woopo)
+    sampRegisterChatCommand('nak', cmd_nakaz)
     sampRegisterChatCommand('sp', cmd_spv)
     sampRegisterChatCommand('mep', cmd_balalai2)
     sampRegisterChatCommand('otv', cmd_otv)
@@ -587,7 +593,7 @@ function main()
 end
 
 function imgui.OnDrawFrame()
-    if not main_window_state.v and not second_window_state.v and not tableOfNew.AutoReport.v and not tableOfNew.tableRes.v then
+    if not main_window_state.v and not second_window_state.v and not tableOfNew.AutoReport.v and not tableOfNew.tableRes.v and not third_window_state.v then
         imgui.Process = false
     end
     apply_custom_style()
@@ -626,9 +632,6 @@ function imgui.OnDrawFrame()
         imgui.Link('https://vk.com/guninik', u8'Влад Гунинык')
         imgui.Link('https://vk.com/klagem00n', u8'Сергей Семец')
         imgui.Text(str_rand[ran2])
-        if imgui.Button(u8'Таблица наказаний', imgui.ImVec2(100, 50)) then
-            third_window_state.v = not third_window_state.v
-        end
         imgui.End()
     end
     if second_window_state.v then
@@ -1146,7 +1149,7 @@ function imgui.OnDrawFrame()
     if third_window_state.v then
         imgui.SetNextWindowPos(imgui.ImVec2(sw /2, sh /2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
         imgui.SetNextWindowSize(imgui.ImVec2(500, 500), imgui.Cond.FirstUseEver)
-		imgui.Begin(u8"##pensBar")
+		imgui.Begin(u8"##pensBar", third_window_state)
 		imgui.SetWindowFontScale(1.1)
 		imgui.Text(u8"Таблица наказаний:")
 		imgui.SetWindowFontScale(1.0)
