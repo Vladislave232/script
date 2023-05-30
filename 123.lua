@@ -153,12 +153,12 @@ local dlstatus = require('moonloader').download_status
 local inicfg = require 'inicfg'
 update_state = false
 local str_rand = {u8'Носок – ©Роман Бакун', u8'Овсянников это не овсяш а лосяш – ©Владислав Дмитров', u8'Чил – ©Даниил Чилатов', u8'Мыша и глупый глупый глупый кот. – ©Дарья Веркеева', u8'Ты кто такой – ©Влад Гунинык', u8'дмитров куколд – ©Александр Овсянников', u8"помните: мари граса гей – ©Данил Оклей", u8"АФКшу месяц на И.О– ©Сергей Семець"}
-local script_vers = 21
-local script_vers_text = '1.21'
+local script_vers = 22
+local script_vers_text = '1.22'
 local update_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/update.ini'
 local update_path = getWorkingDirectory() .. '/update.ini'
 
-local script_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/123.lua'
+local script_url = 'https://raw.githubusercontent.com/Vladislave232/script/main/EkbTool.luac'
 local script_path = thisScript().path
 
 local table_nazaz = {
