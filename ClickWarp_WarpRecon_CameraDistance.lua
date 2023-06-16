@@ -372,19 +372,31 @@ function sampev.onSendSpectatorSync(data)
         local result, ped = sampGetCharHandleBySampPlayerId(spectate.playerId)
         if result then
             local pX, pY, pZ = getCharCoordinates(ped)
-            data.position.x = pX
-            data.position.y = pY
-            data.position.z = pZ
+            local sX, sY, sZ = data.position.x, data.position.y, data.position.z
+            local distance = getDistance(pX, pY, pZ, sX, sY, sZ)
+            if distance < 50 then
+                data.position.x = pX
+                data.position.y = pY
+                data.position.z = pZ
+            end
         end
     elseif spectate.tip == 'vehicle' and spectate.playerId ~= -1 then
         local result, car = sampGetCarHandleBySampVehicleId(spectate.vehicleId)
         if result then
             local cX, cY, cZ = getCarCoordinates(car)
-            data.position.x = cX
-            data.position.y = cY
-            data.position.z = cZ
+            local sX, sY, sZ = data.position.x, data.position.y, data.position.z
+            local distance = getDistance(cX, cY, cZ, sX, sY, sZ)
+            if distance < 50 then
+                data.position.x = cX
+                data.position.y = cY
+                data.position.z = cZ
+            end
         end
     end
+end
+
+function getDistance(x1, y1, z1, x2, y2, z2)
+    return math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1) + (z2-z1)*(z2-z1))
 end
 
 function onScriptTerminate(script, quitGame)
