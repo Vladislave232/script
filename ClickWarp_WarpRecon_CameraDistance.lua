@@ -327,21 +327,6 @@ function sampev.onTogglePlayerSpectating(state)
 end
 
 
-function sampev.onShowDialog(dialogId, style, title, button1, button2, text)
-    local ntitle = title:gsub('{......}', ''):gsub('%c', '')
-    local ntext = text:gsub('{......}', ''):gsub('%c', '')
-    -- sampAddChatMessage(ntext, -1)
-    if spectate.status and 
-        (dialogId == 70     and style == 2 and ntitle:find('Куда Вы хотите выйти')) or
-        (dialogId == 10999  and style == 0 and ntitle:find('^Аренда мопедов$')) or
-        (dialogId == 9291   and style == 0 and ntitle:find('^Бизнес$') and ntext:find('^Вход платный и составляет'))
-        -- (dialogId == 9291   and style == 0 and ntitle:find('^Бизнес$') and ntext:find('^Вход платный и составляет'))
-    then
-        return false
-    end
-end
-
-
 function sampev.onSpectatePlayer(playerId, camType)
     spectate.tip = 'player'
     spectate.playerId = playerId
